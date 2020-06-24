@@ -1,0 +1,10 @@
+FROM ubuntu:latest
+MAINTAINER Drew Leske <drew.leske@computecanada.ca>
+
+RUN apt-get update && apt-get -y upgrade && apt-get install -y python3-pip python3-dev git docker curl shellcheck
+RUN pip3 install --upgrade pip
+RUN pip3 install pylint pytest pytest-coverage PyYAML yamllint docker-compose anybadge
+
+# Kubernetes deployment support
+RUN curl -L https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl -o /bin/kubectl
+RUN chmod a+x /bin/kubectl

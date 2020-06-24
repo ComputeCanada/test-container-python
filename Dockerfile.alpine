@@ -1,0 +1,10 @@
+FROM alpine:latest
+MAINTAINER Drew Leske <drew.leske@computecanada.ca>
+
+RUN apk update && apk add gcc musl-dev py3-pip python3-dev git bash docker postgresql-dev openldap-dev file
+RUN apk add make libffi-dev
+RUN pip3 install --upgrade pip
+RUN pip3 install pylint pytest pytest-coverage PyYAML yamllint docker-compose anybadge
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
+RUN chmod a+x /bin/kubectl
