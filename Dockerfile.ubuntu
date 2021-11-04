@@ -9,6 +9,10 @@ RUN apt-get update \
 RUN pip3 install --upgrade pip
 RUN pip3 install pylint pytest pytest-coverage PyYAML yamllint docker-compose anybadge
 
+RUN apt-get clean
+RUN rm -Rf /root/.cache/pip
+RUN rm -Rf /var/lib/apt/lists/*
+
 # Kubernetes deployment support
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl -o /bin/kubectl
 RUN chmod a+x /bin/kubectl
